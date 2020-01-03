@@ -22,6 +22,7 @@ yarn watch
 ```
 
 **Terminal 2**
+
 ```sh
 cd playground
 
