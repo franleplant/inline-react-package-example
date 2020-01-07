@@ -37,22 +37,12 @@ module.exports = {
     libraryTarget: "umd"
   },
 
-  // This tells webpack to _only_ include
-  // "dependencies" listed in your package.json
-  // in the final bundle, excluding "devDependencies"
-  // and "peerDependencies".
-  // Libraries that most likely will be used by many
-  // dependencies of the _Component Consumer_ should
-  // be marked as "peerDependencies" to avoid having multiple
-  // copies in the Component Consumer's final bundle.
-  // Examples of libraries that should be treated this way are
-  // - react
-  // - react-dom
-  // - lodash
+  // Manually tell webpack about our "peerDependencies"
+  // that should not be included in the final bundle and
+  // will be provided by the Component Consumer, like an Application
   externals: [
     "react",
     "react-dom",
-
     "@emotion/core",
     "@emotion/styled",
     "emotion-theming"
