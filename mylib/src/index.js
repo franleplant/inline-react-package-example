@@ -1,10 +1,15 @@
 import React from "react";
-// You potentially want to make emotion a peerDependency and externalize it
-// if you are going to be using variuos packages that depend on it.
 import styled from "@emotion/styled";
+import { ThemeProvider } from "emotion-theming";
 
 import dog1 from "./dog.jpg";
 import dog2 from "./dog2.jpg";
+
+const defaultTheme = {
+  colors: {
+    primary: "blue"
+  }
+};
 
 // Use regular CSS features through CSS-in-JS
 // instrumented by Emotion
@@ -19,7 +24,7 @@ const Container = styled.div`
 
 const Name = styled.span`
   font-weight: bold;
-  color: blue;
+  color: ${props => props.theme.colors.primary};
 `;
 
 // Use the image from CSS-in-JS
@@ -38,15 +43,23 @@ const Dog1 = () => (
 
 export default function MyComponent(props) {
   return (
-    <Container>
-      <div>
-        Im MyComponent, hi <Name>{props.name}</Name>
-        <br/>
-        Here are some pictures of dogs
-      </div>
+    <ThemeProvider
+      theme={(ancestorTheme = {}) => {
+        console.log("theme", ancestorTheme);
+        return { ...defaultTheme, ...ancestorTheme };
+      }}
+    >
+      <Container>
+        <div>
+          Im MyComponent, hi <Name>{props.name}</Name>, and my color comes from
+          a theme
+          <br />
+          Here are some pictures of dogs
+        </div>
 
-      <Dog1 />
-      <Dog2 />
-    </Container>
+        <Dog1 />
+        <Dog2 />
+      </Container>
+    </ThemeProvider>
   );
 }

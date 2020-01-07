@@ -49,7 +49,14 @@ module.exports = {
   // - react
   // - react-dom
   // - lodash
-  externals: ["react", "react-dom"],
+  externals: [
+    "react",
+    "react-dom",
+
+    "@emotion/core",
+    "@emotion/styled",
+    "emotion-theming"
+  ],
   module: {
     rules: [jsRules, fileRules]
   }
